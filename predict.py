@@ -88,17 +88,7 @@ def predict_stock_price():
 
     # print the predicted prices
     print(predicted_prices)
-    # # Append predicted prices to Excel file
-    # today = datetime.now().strftime("%Y-%m-%d")
-    # filename = 'predicted_prices.xlsx'
-    # if not os.path.isfile(filename):
-    #     df_predicted = pd.DataFrame(predicted_prices, columns=['Day 1'])
-    #     df_predicted.index = [today]
-    #     df_predicted.to_excel(filename)
-    # else:
-    #     df_predicted = pd.read_excel(filename, index_col=0)
-    #     df_predicted['Day ' + str(df_predicted.shape[1] + 1)] = predicted_prices
-    #     df_predicted.to_excel(filename)
+    
     # Append predicted prices to Excel file
     today = datetime.now().strftime("%Y-%m-%d")
     filename = 'predicted_prices.xlsx'
