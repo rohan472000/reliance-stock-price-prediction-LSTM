@@ -24,5 +24,18 @@ jobs:
           pip install pandas numpy matplotlib tensorflow scikit-learn openpyxl
       - name: Run prediction script
         run: python predict.py
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "anand00rohan@gmail.com"
+          git config --global user.name "rohan472000"
+          if [ -s "predicted_prices.xlsx" ]; then
+            git pull origin main
+            git add predicted_prices.xlsx
+            git commit -m "Update predicted prices"
+            git push -f origin main
+          else
+            echo "No changes to commit"
+          fi
+  
       
   
