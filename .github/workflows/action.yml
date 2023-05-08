@@ -25,19 +25,14 @@ jobs:
       - name: Run prediction script
         run: python predict.py
       - name: Commit and push changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: rohan472000
+          author_email: anand00rohan@gmail.com
+          message: Updated predicted_stock.xlsx
+          add: 'predicted_prices.xlsx'
         env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        run: |
-          git config --global user.email "anand00rohan@gmail.com"
-          git config --global user.name "rohan472000"
-          if [ -s "README.md" ]; then
-            git pull origin main
-            git add predicted_prices.xlsx
-            git commit -m "Update README.md"
-            git push -f origin main
-          else
-            echo "No changes to commit"
-          fi
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
   
       
