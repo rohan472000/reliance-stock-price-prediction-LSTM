@@ -118,4 +118,4 @@ def predict_stock_price():
 #         df_predicted.to_excel(filename)
 
 # calling function
-# predict_stock_price()        
+predict_stock_price()        
