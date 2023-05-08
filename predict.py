@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
+from pathlib import Path
+from datetime import datetime
 
 def predict_stock_price():
     # Read data
@@ -89,10 +91,12 @@ def predict_stock_price():
     # print the predicted prices
     print(predicted_prices)
     
+    
     # Append predicted prices to Excel file
     today = datetime.now().strftime("%Y-%m-%d")
     filename = 'predicted_prices.xlsx'
-    if not os.path.isfile(filename):
+
+    if not Path(filename).is_file():
         df_predicted = pd.DataFrame(predicted_prices.reshape(1, -1), columns=['Day ' + str(i) for i in range(1, 11)])
         df_predicted.index = [today]
         df_predicted.to_excel(filename)
@@ -100,6 +104,18 @@ def predict_stock_price():
         df_predicted = pd.read_excel(filename, index_col=0)
         df_predicted['Day ' + str(df_predicted.shape[1] + 1)] = predicted_prices.reshape(1, -1)
         df_predicted.to_excel(filename)
+
+    # Append predicted prices to Excel file , use this block only for local OS
+#     today = datetime.now().strftime("%Y-%m-%d")
+#     filename = 'predicted_prices.xlsx'
+#     if not os.path.isfile(filename):
+#         df_predicted = pd.DataFrame(predicted_prices.reshape(1, -1), columns=['Day ' + str(i) for i in range(1, 11)])
+#         df_predicted.index = [today]
+#         df_predicted.to_excel(filename)
+#     else:
+#         df_predicted = pd.read_excel(filename, index_col=0)
+#         df_predicted['Day ' + str(df_predicted.shape[1] + 1)] = predicted_prices.reshape(1, -1)
+#         df_predicted.to_excel(filename)
 
 # calling function
 # predict_stock_price()        
