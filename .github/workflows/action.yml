@@ -24,3 +24,10 @@ jobs:
           pip install pandas numpy matplotlib tensorflow scikit-learn openpyxl
       - name: Run prediction script
         run: python predict.py
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'Update Excel file'
+          commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          file_pattern: 'predicted_prices.xlsx'
+  
