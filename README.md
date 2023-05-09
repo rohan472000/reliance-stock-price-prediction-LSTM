@@ -10,4 +10,9 @@ This Google Colab notebook contains an implementation of an LSTM model to predic
 - You can visualize the predicted stock prices and compare them with the actual prices by running the code cells that generate plots.
 - You can modify the code and experiment with different hyperparameters to improve the accuracy of the predictions.
 
+## Automated prediction and saving:
+
+- Run the `predict.py` to schedule the prediction function to run automatically every day. This function train the model, the preprocessed data, and the file path to save the predicted values as input. `action.yml` use the schedule library to schedule the prediction (`predict.py`) to run every day at a specific time.
+- The predicted values will be saved in the specified Excel file. You can open this file to view the predicted values for each day. Note that the predicted values should be used for informational purposes only, and they should not be relied upon for making financial decisions.
+
 **Note that the model's predictions should be used for informational purposes only, and they should not be relied upon for making financial decisions.**
