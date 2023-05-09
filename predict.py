@@ -94,7 +94,7 @@ def predict_stock_price():
     
     # Append predicted prices to Excel file
     today = datetime.now().strftime("%Y-%m-%d")
-    filename = './predicted_prices.xlsx'
+    filename = 'predicted_prices.xlsx'
 
     if not Path(filename).is_file():
         df_predicted = pd.DataFrame(predicted_prices.reshape(1, -1), columns=['Day ' + str(i) for i in range(1, 11)])
