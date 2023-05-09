@@ -74,10 +74,10 @@ def predict_stock_price():
 
     # make predictions for the next 10 days
     future_data = df.filter(['Close'])
-    last_60_days = future_data[-60:]
-    last_60_days_scaled = scaler.transform(last_60_days)
+    last_X_days = future_data[-800:] # here you can change as I tried with 800 last time
+    last_X_days_scaled = scaler.transform(last_X_days)
     X_test = []
-    X_test.append(last_60_days_scaled)
+    X_test.append(last_X_days_scaled)
     X_test = np.array(X_test)
     X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
     predicted_prices = []
@@ -94,32 +94,37 @@ def predict_stock_price():
     print(predicted_prices)
 
     # # Append predicted prices to Excel file, for GitHub Actions only
-    today = datetime.now().strftime("%Y-%m-%d")
-    filename = 'predicted_prices.xlsx'
-
-    if not Path(filename).is_file():
-        df_predicted = pd.DataFrame(predicted_prices.reshape(1, -1), columns=['Day ' + str(i) for i in range(1, 11)])
-        df_predicted.index = [today]
-        df_predicted.to_excel(filename)
-        print("made and inserted")
-    else:
-        df_predicted = pd.read_excel(filename, index_col=0)
-        df_predicted['Day ' + str(df_predicted.shape[1] + 1)] = predicted_prices.reshape(1, -1)
-        df_predicted.to_excel(filename)
-        print("read and inserted")
-
-    # Append predicted prices to Excel file , use this block only for local OS
-
     # today = datetime.now().strftime("%Y-%m-%d")
     # filename = 'predicted_prices.xlsx'
-    # if not os.path.isfile(filename):
+    #
+    # if not Path(filename).is_file():
     #     df_predicted = pd.DataFrame(predicted_prices.reshape(1, -1), columns=['Day ' + str(i) for i in range(1, 11)])
     #     df_predicted.index = [today]
     #     df_predicted.to_excel(filename)
+    #     print("made and inserted")
     # else:
     #     df_predicted = pd.read_excel(filename, index_col=0)
     #     df_predicted['Day ' + str(df_predicted.shape[1] + 1)] = predicted_prices.reshape(1, -1)
     #     df_predicted.to_excel(filename)
+    #     print("read and inserted")
+
+    # Append predicted prices to Excel file , use this block only for local OS
+
+    # Append predicted prices to Excel file
+    today = datetime.now().strftime("%Y-%m-%d")
+    filename = 'predicted_prices.xlsx'
+
+    df_predicted = pd.DataFrame(predicted_prices.reshape(1, -1), columns=['Day ' + str(i) for i in range(1, 11)])
+    df_predicted.index = [today]
+
+    if not Path(filename).is_file():
+        df_predicted.to_excel(filename)
+        print("created and inserted")
+    else:
+        df_existing = pd.read_excel(filename, index_col=0)
+        df_combined = pd.concat([df_existing, df_predicted], axis=0)
+        df_combined.to_excel(filename)
+        print("appended and inserted")
 
 
 # calling function
