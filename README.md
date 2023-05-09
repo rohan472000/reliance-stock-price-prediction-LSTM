@@ -14,6 +14,7 @@ This Google Colab notebook contains an implementation of an LSTM model to predic
 
 ## Automated prediction and saving:
 
+- To run `predict.py` use python3.8 (recommended).
 - Run the `predict.py` to schedule the prediction function to run automatically every day. This function train the model, the preprocessed data, and the file path to save the predicted values as input, `action.yml` used here to schedule the prediction (`predict.py`) to run every day at a specific time.
 - The predicted values will be saved in the specified Excel file. You can open this file to view the predicted values for each day. Note that the predicted values should be used for informational purposes only, and they should not be relied upon for making financial decisions.
 

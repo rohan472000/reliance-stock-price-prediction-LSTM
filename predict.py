@@ -1,10 +1,12 @@
+import os
+
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
 from pathlib import Path
 from datetime import datetime
+
 
 def predict_stock_price():
     # Read data
@@ -14,7 +16,7 @@ def predict_stock_price():
     data = df.filter(['Close']).values
 
     # Scale data between 0 and 1
-    scaler = MinMaxScaler(feature_range=(0,1))
+    scaler = MinMaxScaler(feature_range=(0, 1))
     scaled_data = scaler.fit_transform(data)
 
     # Split data into training and testing sets
@@ -24,7 +26,7 @@ def predict_stock_price():
     y_train = []
 
     for i in range(10, len(train_data)):
-        x_train.append(train_data[i-10:i, 0])
+        x_train.append(train_data[i - 10:i, 0])
         y_train.append(train_data[i, 0])
 
     x_train, y_train = np.array(x_train), np.array(y_train)
@@ -49,7 +51,7 @@ def predict_stock_price():
     y_test = data[training_data_len:, :]
 
     for i in range(10, len(test_data)):
-        x_test.append(test_data[i-10:i, 0])
+        x_test.append(test_data[i - 10:i, 0])
 
     x_test = np.array(x_test)
     x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
@@ -90,9 +92,8 @@ def predict_stock_price():
 
     # print the predicted prices
     print(predicted_prices)
-    
-    
-    # Append predicted prices to Excel file
+
+    # # Append predicted prices to Excel file, for GitHub Actions only
     today = datetime.now().strftime("%Y-%m-%d")
     filename = 'predicted_prices.xlsx'
 
@@ -108,16 +109,18 @@ def predict_stock_price():
         print("read and inserted")
 
     # Append predicted prices to Excel file , use this block only for local OS
-#     today = datetime.now().strftime("%Y-%m-%d")
-#     filename = 'predicted_prices.xlsx'
-#     if not os.path.isfile(filename):
-#         df_predicted = pd.DataFrame(predicted_prices.reshape(1, -1), columns=['Day ' + str(i) for i in range(1, 11)])
-#         df_predicted.index = [today]
-#         df_predicted.to_excel(filename)
-#     else:
-#         df_predicted = pd.read_excel(filename, index_col=0)
-#         df_predicted['Day ' + str(df_predicted.shape[1] + 1)] = predicted_prices.reshape(1, -1)
-#         df_predicted.to_excel(filename)
+
+    # today = datetime.now().strftime("%Y-%m-%d")
+    # filename = 'predicted_prices.xlsx'
+    # if not os.path.isfile(filename):
+    #     df_predicted = pd.DataFrame(predicted_prices.reshape(1, -1), columns=['Day ' + str(i) for i in range(1, 11)])
+    #     df_predicted.index = [today]
+    #     df_predicted.to_excel(filename)
+    # else:
+    #     df_predicted = pd.read_excel(filename, index_col=0)
+    #     df_predicted['Day ' + str(df_predicted.shape[1] + 1)] = predicted_prices.reshape(1, -1)
+    #     df_predicted.to_excel(filename)
+
 
 # calling function
-predict_stock_price()        
+predict_stock_price()
