@@ -25,15 +25,16 @@ jobs:
       - name: Run prediction script
         run: python predict.py
       - name: Commit and push changes
-        uses: EndBug/add-and-commit@v7
-        with:
-          author_name: rohan472000
-          author_email: anand00rohan@gmail.com
-          message: Updated predicted_stock.xlsx
-          add: 'predicted_prices.xlsx'
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
+        uses: stefanzweifel/git-auto-commit-action@v4
+
+        with:
+
+          commit_message: 'updated xls'
+
+          branch: ${{ github.ref }}
+
+          commit_options: '--no-verify'
   
       
   
