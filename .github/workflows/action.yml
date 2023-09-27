@@ -1,6 +1,7 @@
 name: Daily Stock Price Prediction
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
