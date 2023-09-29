@@ -1,6 +1,6 @@
 # Reliance Stock Price Prediction using LSTM Model
 
-This Google Colab notebook contains an implementation of an **LSTM** model to predict the future stock prices of Reliance Industries Limited (RIL). The model is trained on historical data spanning from January 2018 to April 2023, and it generates forecasts for the next 10 trading days.
+This Google Colab notebook contains an implementation of an **LSTM** model to predict the future stock prices of Reliance Industries Limited **(RIL)**. The model is trained on historical data spanning from January 2018 to April 2023, and it generates forecasts for the next 10 trading days.
 
 ![Screenshot (186)](https://user-images.githubusercontent.com/96521078/236998369-f9b2e25e-27ff-4480-b33f-f3e400447c9a.png)
 
