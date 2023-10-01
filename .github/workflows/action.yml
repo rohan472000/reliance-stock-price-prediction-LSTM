@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
+    paths-ignore:
+     - 'predicted_prices.xlsx'
+      
   schedule:
     - cron: '0 0 * * *'  # Run at midnight every day
 
