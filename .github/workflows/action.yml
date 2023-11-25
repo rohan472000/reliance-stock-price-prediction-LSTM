@@ -8,7 +8,7 @@ on:
      - 'predicted_prices.xlsx'
       
   schedule:
-    - cron: '0 0 * * *'  # Run at midnight every day
+    - cron: '0 0 1 * *'  # Run at midnight every day
 
 jobs:
   predict_stock_price:
